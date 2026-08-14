@@ -1,0 +1,47 @@
+<div class="rollcard cpr-roll-tracker-chat-card {{themeClass}}">
+  <div class="rollcard-top">
+    <div class="cpr-block chat-rollTitle-stat">
+      <div class="cpr-roll-tracker-chat-title text-center text-padding-top text-normal text-semi">
+        <i class="fas fa-chart-simple" aria-hidden="true"></i>
+        <span>{{localize "CPRRollTracker.ComparisonTitle"}}</span>
+      </div>
+      <div class="rollcard-subtitle">
+        <div class="rollcard-subtitle-center text-small">{{viewLabel}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="rollcard-bottom">
+    <div class="cpr-block">
+      <table class="cpr-roll-tracker-comparison-table">
+        <thead>
+          <tr>
+            <th>{{localize "CPRRollTracker.User"}}</th>
+            <th>{{localize "CPRRollTracker.Total"}}</th>
+            <th>{{localize "CPRRollTracker.Ones"}}</th>
+            <th>{{localize "CPRRollTracker.Tens"}}</th>
+            <th>{{localize "CPRRollTracker.Median"}}</th>
+            <th>{{localize "CPRRollTracker.Average"}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each users}}
+            <tr>
+              <td>{{name}}</td>
+              <td>{{total}}</td>
+              <td>{{ones}}</td>
+              <td>{{tens}}</td>
+              <td>{{median}}</td>
+              <td>{{average}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <ul class="cpr-roll-tracker-highlights">
+        <li><strong>{{localize "CPRRollTracker.HighestAverage"}}:</strong> {{highestAverage.names}} — {{highestAverage.value}}</li>
+        <li><strong>{{localize "CPRRollTracker.LowestAverage"}}:</strong> {{lowestAverage.names}} — {{lowestAverage.value}}</li>
+        <li><strong>{{localize "CPRRollTracker.MostOnes"}}:</strong> {{mostOnes.names}} — {{mostOnes.value}}</li>
+        <li><strong>{{localize "CPRRollTracker.MostTens"}}:</strong> {{mostTens.names}} — {{mostTens.value}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

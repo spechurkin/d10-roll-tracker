@@ -1,0 +1,73 @@
+{
+  "id": "d10-roll-tracker",
+  "title": "d10 Roll Tracker",
+  "description": "Tracks initial d10 values per user and provides system-themed statistics for Cyberpunk RED and World of Darkness.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "13",
+    "maximum": "13"
+  },
+  "authors": [
+    {
+      "name": "HoloLight17",
+      "flags": {}
+    }
+  ],
+  "esmodules": [
+    "scripts/main.js"
+  ],
+  "styles": [
+    "styles/roll-tracker.css"
+  ],
+  "socket": true,
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    },
+    {
+      "lang": "ru",
+      "name": "Русский",
+      "path": "lang/ru.json",
+      "flags": {}
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "cyberpunk-red-core",
+        "type": "system",
+        "compatibility": {
+          "minimum": "0.92.4"
+        }
+      },
+      {
+        "id": "worldofdarkness",
+        "type": "system",
+        "compatibility": {
+          "minimum": "4.2.12"
+        }
+      },
+      {
+        "id": "vtm5e",
+        "type": "system",
+        "compatibility": {
+			"minimum": "5.0.11"
+		}
+      },
+      {
+        "id": "wod5e",
+        "type": "system",
+        "compatibility": {
+			"minimum": "5.3.1"
+		}
+      }
+    ]
+  },
+  "url": "https://github.com/spechurkin/d10-roll-tracker",
+  "manifest": "https://raw.githubusercontent.com/spechurkin/d10-roll-tracker/master/module.json",
+  "download": "https://github.com/spechurkin/d10-roll-tracker/releases/download/1.0.0/d10-roll-tracker.zip"
+}

@@ -1,0 +1,556 @@
+.cpr-roll-tracker,
+.cpr-roll-tracker-sheet,
+.cpr-roll-tracker-chat-card,
+.cpr-roll-tracker-streak {
+  --roll-tracker-font: var(--font-primary, "Signika", sans-serif);
+  --roll-tracker-hero-font: var(--font-serif, Georgia, serif);
+  --roll-tracker-font-xs: 0.6rem;
+  --roll-tracker-font-sm: 0.7rem;
+  --roll-tracker-font-md: 0.9rem;
+  --roll-tracker-window: #ecebe7;
+  --roll-tracker-window-image: none;
+  --roll-tracker-accent: #782e2e;
+  --roll-tracker-border: #555;
+  --roll-tracker-box: rgba(245, 245, 245, 0.92);
+  --roll-tracker-header: #252525;
+  --roll-tracker-header-image: none;
+  --roll-tracker-row-even: rgba(245, 245, 245, 0.92);
+  --roll-tracker-row-odd: rgba(224, 224, 224, 0.92);
+  --roll-tracker-text: #191919;
+  --roll-tracker-header-text: #fff;
+  --roll-tracker-hint: #555;
+  --roll-tracker-icon: #252525;
+  --roll-tracker-icon-dimmed: #999;
+  --roll-tracker-input: #f3f3f3;
+  --roll-tracker-hover: #782e2e;
+  --roll-tracker-critical: #8d1717;
+  --roll-tracker-chat: #f3f3f3;
+  --roll-tracker-chat-text: #191919;
+  --roll-tracker-chat-border: #999;
+  --roll-tracker-radius: 0.2rem;
+}
+
+.roll-tracker-theme-cyberpunk {
+  --roll-tracker-font: var(--cpr-font-primary, "Jost", sans-serif);
+  --roll-tracker-hero-font: var(--cpr-font-hero, "Rubik", sans-serif);
+  --roll-tracker-font-xs: var(--cpr-font-smallest, 0.6rem);
+  --roll-tracker-font-sm: var(--cpr-font-smaller, 0.7rem);
+  --roll-tracker-font-md: var(--cpr-font-small, 0.9rem);
+  --roll-tracker-window: var(--cpr-background-window, #eaeaea);
+  --roll-tracker-accent: var(--cpr-text-header-line, #b90202);
+  --roll-tracker-border: var(--cpr-background-border, #b90202);
+  --roll-tracker-box: var(--cpr-background-box, #eaeaea);
+  --roll-tracker-header: var(--cpr-background-header, #0d0b0c);
+  --roll-tracker-row-even: var(--cpr-background-row-even, #eaeaea);
+  --roll-tracker-row-odd: var(--cpr-background-row-odd, #ffc3b6);
+  --roll-tracker-text: var(--cpr-text-normal, #0d0b0c);
+  --roll-tracker-header-text: var(--cpr-text-header, #eaeaea);
+  --roll-tracker-hint: var(--cpr-text-hint, #444);
+  --roll-tracker-icon: var(--cpr-text-icon-normal, #0d0b0c);
+  --roll-tracker-icon-dimmed: var(--cpr-text-icon-dimmed, #9e9f9f);
+  --roll-tracker-input: var(--cpr-background-foundry-input, #eaeaea);
+  --roll-tracker-hover: var(--cpr-background-foundry-hover, #b90202);
+  --roll-tracker-critical: var(--cpr-text-icon-highlight, #b90202);
+  --roll-tracker-chat: var(--cpr-background-chat-card, #eaeaea);
+  --roll-tracker-chat-text: var(--cpr-text-chat-normal, #0d0b0c);
+  --roll-tracker-chat-border: var(--cpr-background-chat-border, #9e9f9f);
+  --roll-tracker-radius: 0;
+}
+
+.roll-tracker-theme-worldofdarkness {
+  --roll-tracker-font: var(--main-font, Verdana, Helvetica, sans-serif);
+  --roll-tracker-hero-font: var(--main-font, Verdana, Helvetica, sans-serif);
+  --roll-tracker-font-xs: var(--wod-font-xs, 0.625rem);
+  --roll-tracker-font-sm: var(--wod-font-sm, 0.75rem);
+  --roll-tracker-font-md: var(--wod-font-md, 0.875rem);
+  --roll-tracker-window: var(--sheet-background-color, #f5f5f5);
+  --roll-tracker-window-image: url("../../../systems/worldofdarkness/assets/img/graphics/20Page.jpg");
+  --roll-tracker-accent: var(--main-full-color, #184e77);
+  --roll-tracker-border: var(--main-full-color, #184e77);
+  --roll-tracker-box: rgba(245, 245, 245, 0.9);
+  --roll-tracker-header: var(--main-full-color, #184e77);
+  --roll-tracker-row-even: rgba(245, 245, 245, 0.9);
+  --roll-tracker-row-odd: var(--main-dim-color, rgba(24, 78, 119, 0.12));
+  --roll-tracker-text: #121212;
+  --roll-tracker-header-text: #fff;
+  --roll-tracker-hint: #393939;
+  --roll-tracker-icon: #121212;
+  --roll-tracker-icon-dimmed: #777;
+  --roll-tracker-input: #f5f5f5;
+  --roll-tracker-hover: var(--main-full-color, #184e77);
+  --roll-tracker-critical: var(--main-vampire-color, #790813);
+  --roll-tracker-chat: var(--chat-text-background, #f5f5f5);
+  --roll-tracker-chat-text: var(--chat-text-color, #121212);
+  --roll-tracker-chat-border: var(--main-full-color, #184e77);
+  --roll-tracker-radius: 0;
+}
+
+.roll-tracker-theme-wod5e {
+  --roll-tracker-font: Vollkorn, var(--font-primary, serif);
+  --roll-tracker-hero-font: Amarante, Vollkorn, var(--font-serif, serif);
+  --roll-tracker-window: var(--system-color-4, #ededec);
+  --roll-tracker-window-image: url("../../../systems/wod5e/assets/actor/actor_background.webp");
+  --roll-tracker-accent: var(--system-color-3, #827dcaf0);
+  --roll-tracker-border: var(--system-color-1, #302d5bf0);
+  --roll-tracker-box: rgba(237, 237, 236, 0.94);
+  --roll-tracker-header: var(--system-color-11, #181818);
+  --roll-tracker-header-image: linear-gradient(
+      rgb(24 24 24 / 20%),
+      rgb(24 24 24 / 58%)
+    ),
+    url("../../../systems/wod5e/assets/ui/Actor_Header_Background.webp");
+  --roll-tracker-row-even: rgba(237, 237, 236, 0.94);
+  --roll-tracker-row-odd: rgba(210, 223, 235, 0.94);
+  --roll-tracker-text: var(--system-color-7, #333);
+  --roll-tracker-header-text: var(--system-color-6, #fff);
+  --roll-tracker-hint: var(--system-color-10, #4b4b4b);
+  --roll-tracker-icon: var(--system-color-7, #333);
+  --roll-tracker-icon-dimmed: var(--system-color-8, #c4c4c4);
+  --roll-tracker-input: var(--system-color-4, #ededec);
+  --roll-tracker-hover: var(--system-color-3, #827dcaf0);
+  --roll-tracker-critical: var(--system-color-9, #e02b2b);
+  --roll-tracker-chat: var(--system-color-7, #333);
+  --roll-tracker-chat-text: var(--system-color-6, #fff);
+  --roll-tracker-chat-border: var(--system-color-3, #827dcaf0);
+  --roll-tracker-radius: 0.25rem;
+}
+
+.cpr-roll-tracker .window-content {
+  padding: 0;
+  overflow: auto;
+}
+
+.cpr-roll-tracker-sheet {
+  min-width: 50rem;
+  padding: 0.75rem;
+  color: var(--roll-tracker-text);
+  background-color: var(--roll-tracker-window);
+  background-image: var(--roll-tracker-window-image);
+  font-family: var(--roll-tracker-font);
+}
+
+.cpr-roll-tracker-header {
+  display: flex;
+  min-height: 4.5rem;
+  margin-bottom: 0.65rem;
+  overflow: hidden;
+  color: var(--roll-tracker-header-text);
+  background-color: var(--roll-tracker-header);
+  background-image: var(--roll-tracker-header-image);
+  background-position: center;
+  background-size: cover;
+  border-bottom: 0.3rem solid var(--roll-tracker-accent);
+  border-radius: var(--roll-tracker-radius);
+}
+
+.roll-tracker-theme-cyberpunk .cpr-roll-tracker-header {
+  clip-path: polygon(1.25rem 0, 100% 0, 100% 100%, 0 100%, 0 1.25rem);
+}
+
+.cpr-roll-tracker-header__icon {
+  display: grid;
+  flex: 0 0 4.5rem;
+  place-items: center;
+  font-size: 2rem;
+  color: var(--roll-tracker-accent);
+  border-right: 0.12rem solid var(--roll-tracker-accent);
+}
+
+.roll-tracker-theme-worldofdarkness .cpr-roll-tracker-header__icon {
+  color: var(--roll-tracker-header-text);
+}
+
+.cpr-roll-tracker-header__text {
+  display: flex;
+  min-width: 0;
+  padding: 0.55rem 0.8rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cpr-roll-tracker-header__text h1 {
+  margin: 0;
+  border: 0;
+  color: inherit;
+  font-family: var(--roll-tracker-hero-font);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.roll-tracker-theme-cyberpunk .cpr-roll-tracker-header__text h1 {
+  text-transform: uppercase;
+}
+
+.roll-tracker-theme-wod5e .cpr-roll-tracker-header__text h1 {
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
+.cpr-roll-tracker-header__text p {
+  margin: 0.15rem 0 0;
+  color: inherit;
+  font-size: var(--roll-tracker-font-sm);
+  opacity: 0.82;
+}
+
+.cpr-roll-tracker-frame {
+  padding: 0.25rem;
+  background: var(--roll-tracker-border);
+  border-radius: var(--roll-tracker-radius);
+}
+
+.roll-tracker-theme-cyberpunk .cpr-roll-tracker-frame {
+  clip-path: polygon(0 1rem, 0 100%, 100% 100%, 100% 0, 1rem 0);
+}
+
+.cpr-roll-tracker-toolbar {
+  display: flex;
+  margin-bottom: 0.65rem;
+  gap: 0.4rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.cpr-roll-tracker-toolbar button {
+  width: auto;
+  min-height: 1.85rem;
+  margin: 0;
+  padding: 0.2rem 0.55rem;
+  color: var(--roll-tracker-text);
+  background: var(--roll-tracker-input);
+  border: 0.063rem solid var(--roll-tracker-border);
+  border-radius: var(--roll-tracker-radius);
+  font-family: var(--roll-tracker-font);
+  font-size: var(--roll-tracker-font-sm);
+  line-height: 1.2;
+}
+
+.roll-tracker-theme-worldofdarkness .cpr-roll-tracker-toolbar button {
+  color: var(--roll-tracker-header-text);
+  background: var(--roll-tracker-accent);
+}
+
+.cpr-roll-tracker-toolbar button:hover,
+.cpr-roll-tracker-toolbar button:focus-visible {
+  border-color: var(--roll-tracker-critical);
+  box-shadow: 0 0 0.25rem var(--roll-tracker-hover);
+}
+
+.cpr-roll-tracker-view {
+  margin-right: auto;
+  padding-left: 0.15rem;
+  color: var(--roll-tracker-hint);
+  font-size: var(--roll-tracker-font-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cpr-roll-tracker-toolbar i {
+  margin-right: 0.25rem;
+  color: var(--roll-tracker-critical);
+}
+
+.roll-tracker-theme-worldofdarkness .cpr-roll-tracker-toolbar button i {
+  color: inherit;
+}
+
+.cpr-roll-tracker-table {
+  overflow: hidden;
+  background: var(--roll-tracker-box);
+  border-radius: var(--roll-tracker-radius);
+}
+
+.roll-tracker-theme-cyberpunk .cpr-roll-tracker-table {
+  clip-path: polygon(0 0.88rem, 0 100%, 100% 100%, 100% 0, 0.88rem 0);
+}
+
+.cpr-roll-tracker-row {
+  display: grid;
+  grid-template-columns:
+    minmax(10rem, 1.6fr)
+    minmax(3.8rem, 0.5fr)
+    repeat(2, minmax(5.3rem, 0.75fr))
+    repeat(2, minmax(4.7rem, 0.7fr))
+    minmax(5rem, 0.75fr)
+    minmax(6.5rem, 0.9fr);
+  min-height: 3.4rem;
+  align-items: stretch;
+  background: var(--roll-tracker-row-even);
+}
+
+.cpr-roll-tracker-row:nth-child(odd):not(.cpr-roll-tracker-row--head) {
+  background: var(--roll-tracker-row-odd);
+}
+
+.cpr-roll-tracker-row--head {
+  min-height: 2.35rem;
+  color: var(--roll-tracker-header-text);
+  background-color: var(--roll-tracker-header);
+  background-image: var(--roll-tracker-header-image);
+  background-position: center;
+  background-size: cover;
+  font-size: var(--roll-tracker-font-sm);
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.cpr-roll-tracker-row--head .cpr-roll-tracker-cell {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  font-size: var(--roll-tracker-font-sm);
+}
+
+.roll-tracker-theme-worldofdarkness .cpr-roll-tracker-row--head .cpr-roll-tracker-cell,
+.roll-tracker-theme-wod5e .cpr-roll-tracker-row--head .cpr-roll-tracker-cell {
+  font-size: 0.625rem;
+}
+
+.cpr-roll-tracker-row--self {
+  box-shadow: inset 0.2rem 0 0 var(--roll-tracker-accent);
+}
+
+.cpr-roll-tracker-cell {
+  display: flex;
+  min-width: 0;
+  padding: 0.5rem 0.35rem;
+  align-items: center;
+  justify-content: center;
+  border-left: 0.063rem solid color-mix(in srgb, var(--roll-tracker-border) 35%, transparent);
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.cpr-roll-tracker-cell:first-child {
+  border-left: 0;
+}
+
+.cpr-roll-tracker-cell--user {
+  gap: 0.55rem;
+  padding-left: 0.8rem;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.cpr-roll-tracker-cell--critical {
+  color: var(--roll-tracker-critical);
+  font-size: 1.18rem;
+  font-weight: 800;
+}
+
+.cpr-roll-tracker-cell--mode {
+  display: flex;
+  gap: 0.2rem;
+  flex-wrap: wrap;
+}
+
+.cpr-roll-tracker-cell--mode small {
+  color: var(--roll-tracker-hint);
+  font-size: var(--roll-tracker-font-xs);
+  font-weight: 500;
+}
+
+.cpr-roll-tracker-cell--actions {
+  gap: 0.18rem;
+}
+
+.cpr-roll-tracker-cell--actions button {
+  display: grid;
+  width: 1.65rem;
+  height: 1.65rem;
+  min-width: 1.65rem;
+  margin: 0;
+  padding: 0;
+  place-items: center;
+  color: var(--roll-tracker-icon);
+  background: transparent;
+  border: 0;
+  border-radius: var(--roll-tracker-radius);
+  line-height: 1;
+}
+
+.cpr-roll-tracker-cell--actions button:hover,
+.cpr-roll-tracker-cell--actions button:focus-visible {
+  color: var(--roll-tracker-critical);
+  box-shadow: none;
+  text-shadow: 0 0 0.3rem var(--roll-tracker-hover);
+}
+
+.cpr-roll-tracker-cell--actions button i {
+  margin: 0;
+}
+
+.cpr-roll-tracker-user {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.cpr-roll-tracker-user strong {
+  overflow: hidden;
+  font-size: var(--roll-tracker-font-md);
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cpr-roll-tracker-user small {
+  color: var(--roll-tracker-hint);
+  font-size: var(--roll-tracker-font-xs);
+  font-weight: 500;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.cpr-roll-tracker-status {
+  width: 0.55rem;
+  height: 0.55rem;
+  flex: 0 0 0.55rem;
+  background: var(--roll-tracker-icon-dimmed);
+  border-radius: 50%;
+}
+
+.cpr-roll-tracker-status.is-active {
+  background: #42a846;
+  box-shadow: 0 0 0.25rem rgb(66 168 70 / 70%);
+}
+
+.cpr-roll-tracker-note {
+  display: flex;
+  margin-top: 0.65rem;
+  gap: 0.45rem;
+  align-items: flex-start;
+  color: var(--roll-tracker-hint);
+  font-size: var(--roll-tracker-font-sm);
+  line-height: 1.3;
+}
+
+.cpr-roll-tracker-note i {
+  margin-top: 0.1rem;
+  color: var(--roll-tracker-critical);
+}
+
+.cpr-roll-tracker-chat-card {
+  overflow: hidden;
+  color: var(--roll-tracker-chat-text);
+  background: var(--roll-tracker-chat);
+  border: 0.063rem solid var(--roll-tracker-chat-border);
+  border-radius: var(--roll-tracker-radius);
+  font-family: var(--roll-tracker-font);
+}
+
+.cpr-roll-tracker-chat-card .rollcard-top {
+  color: var(--roll-tracker-header-text);
+  background-color: var(--roll-tracker-header);
+  background-image: var(--roll-tracker-header-image);
+  background-position: center;
+  background-size: cover;
+  border-bottom: 0.18rem solid var(--roll-tracker-accent);
+}
+
+.cpr-roll-tracker-chat-card .rollcard-bottom {
+  color: var(--roll-tracker-chat-text);
+  background: var(--roll-tracker-chat);
+}
+
+.cpr-roll-tracker-chat-card .cpr-block {
+  padding: 0.25rem;
+}
+
+.cpr-roll-tracker-chat-card .cpr-roll-tracker-chat-title {
+  display: flex;
+  padding: 0.25rem;
+  gap: 0.35rem;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  font-family: var(--roll-tracker-hero-font);
+  font-weight: 700;
+}
+
+.cpr-roll-tracker-chat-card .cpr-roll-tracker-chat-title i {
+  color: var(--roll-tracker-accent);
+}
+
+.roll-tracker-theme-worldofdarkness .cpr-roll-tracker-chat-title i {
+  color: inherit;
+}
+
+.cpr-roll-tracker-chat-card .rollcard-subtitle {
+  padding: 0.1rem 0.25rem 0.25rem;
+  color: inherit;
+  font-size: var(--roll-tracker-font-sm);
+  text-align: center;
+  opacity: 0.8;
+}
+
+.cpr-roll-tracker-chat-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr auto;
+  gap: 0.25rem 0.65rem;
+  padding: 0.35rem;
+  color: var(--roll-tracker-chat-text);
+}
+
+.cpr-roll-tracker-chat-grid dt,
+.cpr-roll-tracker-chat-grid dd {
+  margin: 0;
+}
+
+.cpr-roll-tracker-chat-grid dt {
+  font-weight: 600;
+}
+
+.cpr-roll-tracker-chat-grid dd {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.cpr-roll-tracker-comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--roll-tracker-chat-text);
+  font-size: var(--roll-tracker-font-sm);
+}
+
+.cpr-roll-tracker-comparison-table th,
+.cpr-roll-tracker-comparison-table td {
+  padding: 0.22rem;
+  border-bottom: 0.063rem solid var(--roll-tracker-chat-border);
+  text-align: center;
+}
+
+.cpr-roll-tracker-comparison-table th:first-child,
+.cpr-roll-tracker-comparison-table td:first-child {
+  text-align: left;
+}
+
+.cpr-roll-tracker-highlights {
+  margin: 0.35rem 0 0;
+  padding: 0.35rem 0.35rem 0.35rem 1.3rem;
+  color: var(--roll-tracker-chat-text);
+  font-size: var(--roll-tracker-font-sm);
+}
+
+.cpr-roll-tracker-highlights strong {
+  color: var(--roll-tracker-critical);
+}
+
+.cpr-roll-tracker-streak {
+  display: flex;
+  padding: 0.45rem;
+  gap: 0.2rem;
+  flex-direction: column;
+  color: var(--roll-tracker-chat-text);
+  background: var(--roll-tracker-chat);
+  border-left: 0.25rem solid var(--roll-tracker-critical);
+  font-family: var(--roll-tracker-font);
+}
+
+.cpr-roll-tracker-streak span {
+  font-variant-numeric: tabular-nums;
+}

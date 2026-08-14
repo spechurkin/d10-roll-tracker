@@ -1,0 +1,26 @@
+<div class="rollcard cpr-roll-tracker-chat-card {{themeClass}}">
+  <div class="rollcard-top">
+    <div class="cpr-block chat-rollTitle-stat">
+      <div class="cpr-roll-tracker-chat-title text-center text-padding-top text-normal text-semi">
+        <i class="fas fa-dice-d10" aria-hidden="true"></i>
+        <span>{{user.name}}</span>
+      </div>
+      <div class="rollcard-subtitle">
+        <div class="rollcard-subtitle-center text-small">{{viewLabel}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="rollcard-bottom">
+    <div class="cpr-block">
+      <dl class="cpr-roll-tracker-chat-grid">
+        <dt>{{localize "CPRRollTracker.Total"}}</dt><dd>{{stats.total}}</dd>
+        <dt>{{localize "CPRRollTracker.Ones"}}</dt><dd>{{stats.ones}} ({{stats.onesPercentage}}%)</dd>
+        <dt>{{localize "CPRRollTracker.Tens"}}</dt><dd>{{stats.tens}} ({{stats.tensPercentage}}%)</dd>
+        <dt>{{localize "CPRRollTracker.Median"}}</dt><dd>{{stats.median}}</dd>
+        <dt>{{localize "CPRRollTracker.Average"}}</dt><dd>{{stats.average}}</dd>
+        <dt>{{localize "CPRRollTracker.Mode"}}</dt><dd>{{stats.mode}}{{#if stats.modeCount}} ×{{stats.modeCount}}{{/if}}</dd>
+        <dt>{{localize "CPRRollTracker.LastRoll"}}</dt><dd>{{stats.lastRoll}}</dd>
+      </dl>
+    </div>
+  </div>
+</div>
