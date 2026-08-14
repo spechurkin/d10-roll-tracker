@@ -1,15 +1,15 @@
-<section class="cpr-roll-tracker-sheet {{themeClass}}" aria-label="{{localize 'D10RollTracker.Title'}}">
+<section class="cpr-roll-tracker-sheet {{themeClass}}" aria-label="{{localize 'CPRRollTracker.Title'}}">
   <header class="cpr-roll-tracker-header">
     <div class="cpr-roll-tracker-header__icon" aria-hidden="true">
       <i class="fas fa-dice-d10"></i>
     </div>
     <div class="cpr-roll-tracker-header__text">
-      <h1>{{localize "D10RollTracker.Title"}}</h1>
+      <h1>{{localize "CPRRollTracker.Title"}}</h1>
       <p>{{scopeText}}</p>
     </div>
   </header>
 
-  <nav class="cpr-roll-tracker-toolbar" aria-label="{{localize 'D10RollTracker.Actions'}}">
+  <nav class="cpr-roll-tracker-toolbar" aria-label="{{localize 'CPRRollTracker.Actions'}}">
     <span class="cpr-roll-tracker-view">
       <i class="fas {{#if combatOnly}}fa-swords{{else}}fa-list{{/if}}" aria-hidden="true"></i>
       {{viewLabel}}
@@ -21,37 +21,37 @@
     {{#if isGM}}
       <button type="button" data-action="compare">
         <i class="fas fa-chart-simple" aria-hidden="true"></i>
-        {{localize "D10RollTracker.PublishComparison"}}
+        {{localize "CPRRollTracker.PublishComparison"}}
       </button>
     {{/if}}
   </nav>
 
   <div class="cpr-roll-tracker-frame">
-    <div class="cpr-roll-tracker-table" role="table" aria-label="{{localize 'D10RollTracker.Statistics'}}">
+    <div class="cpr-roll-tracker-table" role="table" aria-label="{{localize 'CPRRollTracker.Statistics'}}">
       <div class="cpr-roll-tracker-row cpr-roll-tracker-row--head" role="row">
         <div class="cpr-roll-tracker-cell cpr-roll-tracker-cell--user" role="columnheader">
-          {{localize "D10RollTracker.User"}}
+          {{localize "CPRRollTracker.User"}}
         </div>
         <div class="cpr-roll-tracker-cell" role="columnheader">
-          {{localize "D10RollTracker.Total"}}
+          {{localize "CPRRollTracker.Total"}}
         </div>
         <div class="cpr-roll-tracker-cell" role="columnheader">
-          {{localize "D10RollTracker.Ones"}}
+          {{localize "CPRRollTracker.Ones"}}
         </div>
         <div class="cpr-roll-tracker-cell" role="columnheader">
-          {{localize "D10RollTracker.Tens"}}
+          {{localize "CPRRollTracker.Tens"}}
         </div>
         <div class="cpr-roll-tracker-cell" role="columnheader">
-          {{localize "D10RollTracker.Median"}}
+          {{localize "CPRRollTracker.Median"}}
         </div>
         <div class="cpr-roll-tracker-cell" role="columnheader">
-          {{localize "D10RollTracker.Average"}}
+          {{localize "CPRRollTracker.Average"}}
         </div>
         <div class="cpr-roll-tracker-cell" role="columnheader">
-          {{localize "D10RollTracker.Mode"}}
+          {{localize "CPRRollTracker.Mode"}}
         </div>
         <div class="cpr-roll-tracker-cell cpr-roll-tracker-cell--actions" role="columnheader">
-          {{localize "D10RollTracker.Actions"}}
+          {{localize "CPRRollTracker.Actions"}}
         </div>
       </div>
 
@@ -59,30 +59,30 @@
         <div class="cpr-roll-tracker-row{{#if isSelf}} cpr-roll-tracker-row--self{{/if}}" role="row">
           <div class="cpr-roll-tracker-cell cpr-roll-tracker-cell--user" role="cell">
             <span class="cpr-roll-tracker-status{{#if active}} is-active{{/if}}"
-                  title="{{#if active}}{{localize 'D10RollTracker.Online'}}{{else}}{{localize 'D10RollTracker.Offline'}}{{/if}}"
-                  aria-label="{{#if active}}{{localize 'D10RollTracker.Online'}}{{else}}{{localize 'D10RollTracker.Offline'}}{{/if}}"></span>
+                  title="{{#if active}}{{localize 'CPRRollTracker.Online'}}{{else}}{{localize 'CPRRollTracker.Offline'}}{{/if}}"
+                  aria-label="{{#if active}}{{localize 'CPRRollTracker.Online'}}{{else}}{{localize 'CPRRollTracker.Offline'}}{{/if}}"></span>
             <span class="cpr-roll-tracker-user">
               <strong>{{name}}</strong>
               <small>{{role}}</small>
             </span>
           </div>
-          <div class="cpr-roll-tracker-cell" data-label="{{localize 'D10RollTracker.Total'}}" role="cell">{{total}}</div>
-          <div class="cpr-roll-tracker-cell cpr-roll-tracker-cell--critical" data-label="{{localize 'D10RollTracker.Ones'}}" role="cell">{{ones}}</div>
-          <div class="cpr-roll-tracker-cell cpr-roll-tracker-cell--critical" data-label="{{localize 'D10RollTracker.Tens'}}" role="cell">{{tens}}</div>
-          <div class="cpr-roll-tracker-cell" data-label="{{localize 'D10RollTracker.Median'}}" role="cell">{{median}}</div>
-          <div class="cpr-roll-tracker-cell" data-label="{{localize 'D10RollTracker.Average'}}" role="cell">{{average}}</div>
-          <div class="cpr-roll-tracker-cell cpr-roll-tracker-cell--mode" data-label="{{localize 'D10RollTracker.Mode'}}" role="cell">
+          <div class="cpr-roll-tracker-cell" data-label="{{localize 'CPRRollTracker.Total'}}" role="cell">{{total}}</div>
+          <div class="cpr-roll-tracker-cell cpr-roll-tracker-cell--critical" data-label="{{localize 'CPRRollTracker.Ones'}}" role="cell">{{ones}}</div>
+          <div class="cpr-roll-tracker-cell cpr-roll-tracker-cell--critical" data-label="{{localize 'CPRRollTracker.Tens'}}" role="cell">{{tens}}</div>
+          <div class="cpr-roll-tracker-cell" data-label="{{localize 'CPRRollTracker.Median'}}" role="cell">{{median}}</div>
+          <div class="cpr-roll-tracker-cell" data-label="{{localize 'CPRRollTracker.Average'}}" role="cell">{{average}}</div>
+          <div class="cpr-roll-tracker-cell cpr-roll-tracker-cell--mode" data-label="{{localize 'CPRRollTracker.Mode'}}" role="cell">
             <span>{{mode}}</span>
             {{#if modeCount}}<small>×{{modeCount}}</small>{{/if}}
           </div>
-          <div class="cpr-roll-tracker-cell cpr-roll-tracker-cell--actions" data-label="{{localize 'D10RollTracker.Actions'}}" role="cell">
-            <button type="button" data-action="print" data-user-id="{{id}}" title="{{localize 'D10RollTracker.PrintToChat'}}" aria-label="{{localize 'D10RollTracker.PrintToChat'}}">
+          <div class="cpr-roll-tracker-cell cpr-roll-tracker-cell--actions" data-label="{{localize 'CPRRollTracker.Actions'}}" role="cell">
+            <button type="button" data-action="print" data-user-id="{{id}}" title="{{localize 'CPRRollTracker.PrintToChat'}}" aria-label="{{localize 'CPRRollTracker.PrintToChat'}}">
               <i class="fas fa-message"></i>
             </button>
-            <button type="button" data-action="export" data-user-id="{{id}}" title="{{localize 'D10RollTracker.Export'}}" aria-label="{{localize 'D10RollTracker.Export'}}">
+            <button type="button" data-action="export" data-user-id="{{id}}" title="{{localize 'CPRRollTracker.Export'}}" aria-label="{{localize 'CPRRollTracker.Export'}}">
               <i class="fas fa-download"></i>
             </button>
-            <button type="button" data-action="clear" data-user-id="{{id}}" title="{{localize 'D10RollTracker.Clear'}}" aria-label="{{localize 'D10RollTracker.Clear'}}">
+            <button type="button" data-action="clear" data-user-id="{{id}}" title="{{localize 'CPRRollTracker.Clear'}}" aria-label="{{localize 'CPRRollTracker.Clear'}}">
               <i class="fas fa-trash-can"></i>
             </button>
           </div>
@@ -93,6 +93,6 @@
 
   <footer class="cpr-roll-tracker-note">
     <i class="fas fa-circle-info" aria-hidden="true"></i>
-    <span>{{localize "D10RollTracker.Note"}}</span>
+    <span>{{localize "CPRRollTracker.Note"}}</span>
   </footer>
 </section>

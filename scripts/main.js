@@ -7,6 +7,11 @@ import {
 } from "./statistics.js";
 import { themeClassForSystem } from "./theme.js";
 
+const { ApplicationV2, DialogV2, HandlebarsApplicationMixin } =
+  foundry.applications.api;
+const { renderTemplate } = foundry.applications.handlebars;
+const { escapeHTML, hasProperty, saveDataToFile } = foundry.utils;
+
 const MODULE_ID = "d10-roll-tracker";
 const FLAG_KEY = "statistics";
 const TEMPLATE_PATH = `modules/${MODULE_ID}/templates/roll-tracker.hbs`;
@@ -29,7 +34,7 @@ function currentThemeClass() {
 }
 
 function localize(key) {
-  return game.i18n.localize(`D10RollTracker.${key}`);
+  return game.i18n.localize(`CPRRollTracker.${key}`);
 }
 
 function formatStatistic(value) {
@@ -56,88 +61,102 @@ function visibleUsers() {
   });
 }
 
-class RollTrackerApplication extends Application {
+class RollTrackerApplication extends HandlebarsApplicationMixin(ApplicationV2) {
+  static DEFAULT_OPTIONS = {
+    id: "cpr-roll-tracker",
+    classes: ["cpr-roll-tracker"],
+    position: {
+      width: 900,
+      height: "auto",
+    },
+    window: {
+      icon: "fa-solid fa-dice-d10",
+      resizable: true,
+      title: "CPRRollTracker.Title",
+    },
+    actions: {
+      "toggle-combat": this.#toggleCombat,
+      print: this.#print,
+      export: this.#export,
+      clear: this.#clear,
+      compare: this.#compare,
+    },
+  };
+
+  static PARTS = {
+    tracker: {
+      template: TEMPLATE_PATH,
+      scrollable: [".cpr-roll-tracker-frame"],
+    },
+  };
+
   constructor(options = {}) {
-    super(options);
+    super({
+      ...options,
+      classes: [...(options.classes ?? []), currentThemeClass()],
+    });
     this.combatOnly = false;
   }
 
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      id: "cpr-roll-tracker",
-      classes: ["cpr-roll-tracker", currentThemeClass()],
-      template: TEMPLATE_PATH,
-      title: localize("Title"),
-      width: 900,
-      height: "auto",
-      resizable: true,
-    });
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+
+    return {
+      ...context,
+      isGM: game.user.isGM,
+      themeClass: currentThemeClass(),
+      combatOnly: this.combatOnly,
+      viewLabel: localize(this.combatOnly ? "CombatView" : "AllView"),
+      toggleLabel: localize(
+        this.combatOnly ? "ShowAllRolls" : "ShowCombatRolls"
+      ),
+      scopeText: localize(game.user.isGM ? "GMScope" : "PlayerScope"),
+      users: visibleUsers().map((user) => {
+        const stats = statisticsForUser(user, this.combatOnly);
+        return {
+          id: user.id,
+          name: user.name,
+          active: user.active,
+          isSelf: user.id === game.user.id,
+          role: localize(user.isGM ? "GameMaster" : "Player"),
+          total: stats.total,
+          ones: `${stats.ones} (${stats.onesPercentage}%)`,
+          tens: `${stats.tens} (${stats.tensPercentage}%)`,
+          median: formatStatistic(stats.median),
+          average: formatStatistic(stats.average),
+          mode: stats.mode.length > 0 ? stats.mode.join(", ") : EMPTY_VALUE,
+          modeCount: stats.modeCount,
+          lastRoll: formatStatistic(stats.lastRoll),
+        };
+      }),
+    };
   }
 
-  async getData(options = {}) {
-    const data = await super.getData(options);
-
-    data.isGM = game.user.isGM;
-    data.themeClass = currentThemeClass();
-    data.combatOnly = this.combatOnly;
-    data.viewLabel = localize(this.combatOnly ? "CombatView" : "AllView");
-    data.toggleLabel = localize(
-      this.combatOnly ? "ShowAllRolls" : "ShowCombatRolls"
-    );
-    data.scopeText = localize(game.user.isGM ? "GMScope" : "PlayerScope");
-    data.users = visibleUsers().map((user) => {
-      const stats = statisticsForUser(user, this.combatOnly);
-      return {
-        id: user.id,
-        name: user.name,
-        active: user.active,
-        isSelf: user.id === game.user.id,
-        role: localize(user.isGM ? "GameMaster" : "Player"),
-        total: stats.total,
-        ones: `${stats.ones} (${stats.onesPercentage}%)`,
-        tens: `${stats.tens} (${stats.tensPercentage}%)`,
-        median: formatStatistic(stats.median),
-        average: formatStatistic(stats.average),
-        mode: stats.mode.length > 0 ? stats.mode.join(", ") : EMPTY_VALUE,
-        modeCount: stats.modeCount,
-        lastRoll: formatStatistic(stats.lastRoll),
-      };
-    });
-
-    return data;
+  static #toggleCombat() {
+    this.combatOnly = !this.combatOnly;
+    return this.render({ force: true });
   }
 
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.on("click", "[data-action]", (event) => this._handleAction(event));
+  static #print(_event, target) {
+    return printStatistics(target.dataset.userId, this.combatOnly);
   }
 
-  async _handleAction(event) {
-    event.preventDefault();
-    const action = event.currentTarget.dataset.action;
-    const userId = event.currentTarget.dataset.userId;
+  static #export(_event, target) {
+    return exportStatistics(target.dataset.userId, this.combatOnly);
+  }
 
-    switch (action) {
-      case "toggle-combat":
-        this.combatOnly = !this.combatOnly;
-        return this.render(false);
-      case "print":
-        return printStatistics(userId, this.combatOnly);
-      case "export":
-        return exportStatistics(userId, this.combatOnly);
-      case "clear":
-        return clearStatistics(userId, this);
-      case "compare":
-        return printComparison(this.combatOnly);
-      default:
-        return undefined;
-    }
+  static #clear(_event, target) {
+    return clearStatistics(target.dataset.userId, this);
+  }
+
+  static #compare() {
+    return printComparison(this.combatOnly);
   }
 }
 
 function openTracker() {
   trackerApplication ??= new RollTrackerApplication();
-  trackerApplication.render(true);
+  trackerApplication.render({ force: true });
   return trackerApplication;
 }
 
@@ -271,17 +290,19 @@ async function clearStatistics(userId, application) {
   const user = getAccessibleUser(userId);
   if (!user) return;
 
-  const confirmed = await Dialog.confirm({
-    title: localize("ClearTitle"),
+  const confirmed = await DialogV2.confirm({
+    window: { title: localize("ClearTitle") },
     content: `<p>${localize("ClearConfirm").replace(
       "{name}",
-      foundry.utils.escapeHTML(user.name)
+      escapeHTML(user.name)
     )}</p>`,
+    rejectClose: false,
+    modal: true,
   });
   if (!confirmed) return;
 
   await user.unsetFlag(MODULE_ID, FLAG_KEY);
-  application.render(false);
+  application.render({ force: true });
 }
 
 function rankedNames(rows, property, direction = "max") {
@@ -367,7 +388,7 @@ function createStreakMessage(payload) {
     user: game.user.id,
     content: `<div class="cpr-roll-tracker-streak ${currentThemeClass()}"><strong>${localize(
       "StreakTitle"
-    ).replace("{name}", foundry.utils.escapeHTML(userName))}</strong><span>${values.join(
+    ).replace("{name}", escapeHTML(userName))}</strong><span>${values.join(
       ", "
     )}</span></div>`,
     speaker: { alias: localize("Title") },
@@ -394,8 +415,8 @@ function announceStreak(user, streak) {
 
 function registerSettings() {
   game.settings.register(MODULE_ID, SETTINGS.MAX_ROLLS, {
-    name: "D10RollTracker.Settings.MaxRollsName",
-    hint: "D10RollTracker.Settings.MaxRollsHint",
+    name: "CPRRollTracker.Settings.MaxRollsName",
+    hint: "CPRRollTracker.Settings.MaxRollsHint",
     scope: "world",
     config: true,
     type: Number,
@@ -403,16 +424,16 @@ function registerSettings() {
     range: { min: 10, max: 500, step: 10 },
   });
   game.settings.register(MODULE_ID, SETTINGS.COUNT_BLIND, {
-    name: "D10RollTracker.Settings.CountBlindName",
-    hint: "D10RollTracker.Settings.CountBlindHint",
+    name: "CPRRollTracker.Settings.CountBlindName",
+    hint: "CPRRollTracker.Settings.CountBlindHint",
     scope: "world",
     config: true,
     type: Boolean,
     default: true,
   });
   game.settings.register(MODULE_ID, SETTINGS.STREAK_VISIBILITY, {
-    name: "D10RollTracker.Settings.StreakVisibilityName",
-    hint: "D10RollTracker.Settings.StreakVisibilityHint",
+    name: "CPRRollTracker.Settings.StreakVisibilityName",
+    hint: "CPRRollTracker.Settings.StreakVisibilityHint",
     scope: "world",
     config: true,
     type: String,
@@ -424,8 +445,8 @@ function registerSettings() {
     },
   });
   game.settings.register(MODULE_ID, SETTINGS.STREAK_THRESHOLD, {
-    name: "D10RollTracker.Settings.StreakThresholdName",
-    hint: "D10RollTracker.Settings.StreakThresholdHint",
+    name: "CPRRollTracker.Settings.StreakThresholdName",
+    hint: "CPRRollTracker.Settings.StreakThresholdHint",
     scope: "world",
     config: true,
     type: Number,
@@ -435,31 +456,26 @@ function registerSettings() {
 }
 
 function addTokenControl(controls) {
-  const tokenControls = Array.isArray(controls)
-    ? controls.find((control) => control.name === "token")
-    : controls.tokens ?? controls.token;
-  if (!tokenControls) return;
+  const tokenControls = controls.tokens;
+  if (!tokenControls?.tools) return;
 
   const tool = {
     name: "cpr-roll-tracker",
     title: localize("ControlTooltip"),
-    icon: "fas fa-dice-d10",
+    icon: "fa-solid fa-dice-d10",
+    order: Object.keys(tokenControls.tools).length,
     button: true,
     visible: true,
-    onClick: openTracker,
+    onChange: openTracker,
   };
 
-  if (Array.isArray(tokenControls.tools)) {
-    tokenControls.tools.push(tool);
-  } else if (tokenControls.tools) {
-    tokenControls.tools[tool.name] = tool;
-  }
+  tokenControls.tools[tool.name] = tool;
 }
 
 function statisticsFlagChanged(changes) {
   const namespacePath = `flags.${MODULE_ID}`;
   return (
-    foundry.utils.hasProperty(changes, namespacePath) ||
+    hasProperty(changes, namespacePath) ||
     Object.keys(changes).some((key) => key.startsWith(namespacePath))
   );
 }
@@ -494,6 +510,6 @@ Hooks.on("getSceneControlButtons", addTokenControl);
 Hooks.on("createChatMessage", enqueueMessage);
 Hooks.on("updateUser", (_user, changes) => {
   if (statisticsFlagChanged(changes) && trackerApplication?.rendered) {
-    trackerApplication.render(false);
+    trackerApplication.render({ force: true });
   }
 });
