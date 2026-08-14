@@ -29,7 +29,7 @@ function currentThemeClass() {
 }
 
 function localize(key) {
-  return game.i18n.localize(`CPRRollTracker.${key}`);
+  return game.i18n.localize(`D10RollTracker.${key}`);
 }
 
 function formatStatistic(value) {
@@ -394,8 +394,8 @@ function announceStreak(user, streak) {
 
 function registerSettings() {
   game.settings.register(MODULE_ID, SETTINGS.MAX_ROLLS, {
-    name: "CPRRollTracker.Settings.MaxRollsName",
-    hint: "CPRRollTracker.Settings.MaxRollsHint",
+    name: "D10RollTracker.Settings.MaxRollsName",
+    hint: "D10RollTracker.Settings.MaxRollsHint",
     scope: "world",
     config: true,
     type: Number,
@@ -403,16 +403,16 @@ function registerSettings() {
     range: { min: 10, max: 500, step: 10 },
   });
   game.settings.register(MODULE_ID, SETTINGS.COUNT_BLIND, {
-    name: "CPRRollTracker.Settings.CountBlindName",
-    hint: "CPRRollTracker.Settings.CountBlindHint",
+    name: "D10RollTracker.Settings.CountBlindName",
+    hint: "D10RollTracker.Settings.CountBlindHint",
     scope: "world",
     config: true,
     type: Boolean,
     default: true,
   });
   game.settings.register(MODULE_ID, SETTINGS.STREAK_VISIBILITY, {
-    name: "CPRRollTracker.Settings.StreakVisibilityName",
-    hint: "CPRRollTracker.Settings.StreakVisibilityHint",
+    name: "D10RollTracker.Settings.StreakVisibilityName",
+    hint: "D10RollTracker.Settings.StreakVisibilityHint",
     scope: "world",
     config: true,
     type: String,
@@ -424,8 +424,8 @@ function registerSettings() {
     },
   });
   game.settings.register(MODULE_ID, SETTINGS.STREAK_THRESHOLD, {
-    name: "CPRRollTracker.Settings.StreakThresholdName",
-    hint: "CPRRollTracker.Settings.StreakThresholdHint",
+    name: "D10RollTracker.Settings.StreakThresholdName",
+    hint: "D10RollTracker.Settings.StreakThresholdHint",
     scope: "world",
     config: true,
     type: Number,
