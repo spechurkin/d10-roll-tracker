@@ -437,18 +437,15 @@
   overflow: hidden;
   color: var(--roll-tracker-chat-text);
   background: var(--roll-tracker-chat);
-  border: 0.063rem solid var(--roll-tracker-chat-border);
   border-radius: var(--roll-tracker-radius);
   font-family: var(--roll-tracker-font);
 }
 
 .cpr-roll-tracker-chat-card .rollcard-top {
   color: var(--roll-tracker-header-text);
-  background-color: var(--roll-tracker-header);
   background-image: var(--roll-tracker-header-image);
   background-position: center;
   background-size: cover;
-  border-bottom: 0.18rem solid var(--roll-tracker-accent);
 }
 
 .cpr-roll-tracker-chat-card .rollcard-bottom {
