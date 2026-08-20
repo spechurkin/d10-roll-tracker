@@ -301,7 +301,14 @@ async function clearStatistics(userId, application) {
   });
   if (!confirmed) return;
 
-  await user.unsetFlag(MODULE_ID, FLAG_KEY);
+  if (user.id === game.user.id) {
+    recordingQueue = recordingQueue.then(() =>
+      user.unsetFlag(MODULE_ID, FLAG_KEY)
+    );
+    await recordingQueue;
+  } else {
+    await user.unsetFlag(MODULE_ID, FLAG_KEY);
+  }
   application.render({ force: true });
 }
 
